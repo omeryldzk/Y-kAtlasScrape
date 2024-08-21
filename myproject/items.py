@@ -5,8 +5,15 @@
 
 import scrapy
 
-
-class MyprojectItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class UniversityItem(scrapy.Item):
+    university_id = scrapy.Field()
+    university_name = scrapy.Field()
+    faculty_name = scrapy.Field()
+    department_name = scrapy.Field()
+    language_and_program_type = scrapy.Field()
+    location = scrapy.Field()
+    university_type = scrapy.Field()
+    fee_status = scrapy.Field()
+    education_type = scrapy.Field()
+    quota = scrapy.Field()
+    status = scrapy.Field()
