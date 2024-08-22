@@ -75,8 +75,9 @@ The `script` variable contains a Lua script that is executed by Splash. This scr
     ```
 2. Set up a Splash server. You can run it locally using Docker:
    ```bash
-  docker run -p 8050:8050 scrapinghub/splash
+    docker run -p 8050:8050 scrapinghub/splash
    ```
+
 3. Update the Scrapy project settings to include your Splash server URL:
 
    ```bash
