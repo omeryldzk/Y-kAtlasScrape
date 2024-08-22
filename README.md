@@ -74,7 +74,6 @@ The `script` variable contains a Lua script that is executed by Splash. This scr
    pip install scrapy scrapy-splash
     ```
 2. Set up a Splash server. You can run it locally using Docker:
-3. 
    ```bash
   docker run -p 8050:8050 scrapinghub/splash
    ```
@@ -94,6 +93,12 @@ scrapy crawl yok_spider
 - Scrapy is not suitable for modern dynamically loaded webpages if you can't acces to public API's of the webpage. For example https://yokatlas.yok.gov.tr/tercih-sihirbazi-t4-tablo.php?p=say has 100 pages at the same url and every page
 has 50 universities. This url uses https://yokatlas.yok.gov.tr/server_side/server_processing-atlas2016-TS-t4.php API on the server side. Everytime user requested to the next page url remains same webpage POST requests to https://yokatlas.yok.gov.tr/server_side/server_processing-atlas2016-TS-t4.php
 with form data at the payload part of the request.I try to create fake POST request and fake header  with form data on nextbutton branch but failed.I think using selenium might be easier with this kind of pages
+
+## Contact
+
+This `README.md` file provides a comprehensive explanation of the Scrapy and Splash code, including how pagination is managed and the role of the counter variable.If you have any problems or solutions that i discussed contact me.
+
+
 
 
 
