@@ -9,29 +9,30 @@ class YokSpider(scrapy.Spider):
     ]
     script = """
     function main(splash, args)
-        splash.private_mode_enabled = false
-        assert(splash:go(args.url))
-        assert(splash:wait(5))
+        splash.private_mode_enabled = false  -- Disable private mode
+        assert(splash:go(args.url))          -- Navigate to the URL
+        assert(splash:wait(args.wait))       -- Wait for the page to load
 
-        -- Execute the click on the "Next" button
-        local next_button = splash:select('#mydata_next a')
-        if next_button then
-            next_button:mouse_click()
-            assert(splash:wait(5))  -- Wait for the content to load
+        -- Try to find and click the 'Next' button
+        local next_button_disabled = splash:select('#mydata_next.disabled')
+        if not next_button_disabled then
+            local next_button = splash:select('#mydata_next a')
+            next_button:mouse_click()        -- Click the 'Next' button
+            assert(splash:wait(args.wait))   -- Wait for the table to update
         end
 
         return {
-            html = splash:html(),
-            url = splash:url(),
-            -- Optional: take a screenshot to see what is happening
-            -- png = splash:png(),
+            html = splash:html(),  -- Return the updated page HTML
+            url = splash:url(),    -- Return the current page URL
         }
     end
+
+
     """
 
     def start_requests(self):
         for url in self.start_urls:
-            yield SplashRequest(url, self.parse, args={'wait': 5})
+            yield SplashRequest(url, callback = self.parse, endpoint='execute', args={'lua_source': self.script, 'wait': 5})
 
     def parse(self, response):
         rows = response.css('#mydata > tbody > tr')
@@ -52,8 +53,8 @@ class YokSpider(scrapy.Spider):
 
             yield item
             
-        next_button_disabled = response.css('#mydata_next').xpath('@class').get() == 'paginate_button next disabled'
-        if not next_button_disabled:
+        next_page_url = response.css('#mydata_next a::attr(href)').get()
+        if next_page_url:
             # If not disabled, request the next page
             yield SplashRequest(response.url, self.parse, endpoint='execute', args={'lua_source': self.script, 'wait': 5})
         else:
