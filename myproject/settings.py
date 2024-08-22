@@ -69,7 +69,7 @@ SPLASH_URL = 'http://localhost:8050'
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    "myproject.pipelines.MyprojectPipeline": 300,
+    # "myproject.pipelines.MyprojectPipeline": 300,
     # "myproject.pipelines.SaveToMySQLPipeline": 400,
 
 }

@@ -49,7 +49,7 @@ class YokSpider(scrapy.Spider):
             item['fee_status'] = row.css('td:nth-child(7)::text').get()
             item['education_type'] = row.css('td:nth-child(8)::text').get()
             item['quota'] = row.css('td:nth-child(9) font[color="red"]::text').get()
-            item['status'] = row.css('td:nth-child(10) font[color="red"]::text').get()
+            item['status'] = row.css('td:nth-child(10)::text').get()
 
             yield item
             
