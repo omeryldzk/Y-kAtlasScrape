@@ -71,6 +71,8 @@ SPLASH_URL = 'http://localhost:8050'
 ITEM_PIPELINES = {
     # "myproject.pipelines.MyprojectPipeline": 300,
     # "myproject.pipelines.SaveToMySQLPipeline": 400,
+    "myproject.middlewares.RandomUserAgentMiddleware" : 543,
+
 
 }
 

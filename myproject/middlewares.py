@@ -8,6 +8,18 @@ from scrapy import signals
 # useful for handling different item types with a single interface
 from itemadapter import is_item, ItemAdapter
 
+# myproject/middlewares.py
+
+from fake_useragent import UserAgent
+
+class RandomUserAgentMiddleware:
+    def __init__(self):
+        self.ua = UserAgent()
+
+    def process_request(self, request, spider):
+        # Set a random user-agent
+        request.headers['User-Agent'] = self.ua.random
+
 
 class MyprojectSpiderMiddleware:
     # Not all methods need to be defined. If a method is not defined,
