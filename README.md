@@ -93,7 +93,7 @@ scrapy crawl yok_spider
 
 - Scrapy is not suitable for modern dynamically loaded webpages if you can't acces to public API's of the webpage. For example https://yokatlas.yok.gov.tr/tercih-sihirbazi-t4-tablo.php?p=say has 100 pages at the same url and every page
 has 50 universities. This url uses https://yokatlas.yok.gov.tr/server_side/server_processing-atlas2016-TS-t4.php API on the server side. Everytime user requested to the next page url remains same webpage POST requests to https://yokatlas.yok.gov.tr/server_side/server_processing-atlas2016-TS-t4.php
-with form data at the payload part of the request.I try to create fake POST request and fake header  with form data on nextbutton branch but failed.I think using selenium might be easier with this kind of pages
+with form data at the payload part of the request.Clients can't acces this url with GET request webpage prints "Yetkisiz işlem" .I try to create fake POST request and fake header  with form data on nextbutton branch but failed.I think using selenium might be easier with this kind of pages
 
 ## Contact
 
