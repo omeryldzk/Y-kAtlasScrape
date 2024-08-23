@@ -1,0 +1,23 @@
+services:
+  splash:
+    image: scrapinghub/splash:latest
+    ports:
+      - "8050:8050"
+    environment:
+      - SPLASH_USER=guest
+      - SPLASH_PASS=guest
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8050"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  scrapy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      splash:
+        condition: service_healthy
+    environment:
+      - SPLASH_URL=http://localhost:8050
