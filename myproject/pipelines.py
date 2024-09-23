@@ -30,6 +30,7 @@ class MyprojectPipeline:
 
         return item
 class SaveToMySQLPipeline:
+    
     def open_spider(self, spider):
         # Establish connection to the MySQL database
         self.conn = mysql.connector.connect(

@@ -14,7 +14,7 @@ class YokSpider(scrapy.Spider):
         splash:set_viewport_full()
         splash:go(args.url)
 
-        local wait_after_click = 5.0
+        local wait_after_click = 2.0
         local scrolls = 0
         local page_number = args.page_number
 
@@ -42,8 +42,7 @@ class YokSpider(scrapy.Spider):
 
     def start_requests(self):
         for url in self.start_urls:
-            yield SplashRequest(url, callback=self.parse, endpoint='execute', args={'lua_source': self.script, 'wait': 5, 'page_number': self.counter})
-            self.counter+=1
+            yield SplashRequest(url, callback=self.parse, endpoint='execute', args={'lua_source': self.script, 'wait': 2, 'page_number': self.counter})
 
     def parse(self, response):
         rows = response.css('#mydata > tbody > tr')
@@ -68,6 +67,6 @@ class YokSpider(scrapy.Spider):
         next_page_url = response.css('#mydata_next a::attr(href)').get()
         self.counter+=1
         if next_page_url:
-            yield SplashRequest(response.url, self.parse, endpoint='execute', args={'lua_source': self.script, 'wait': 5, 'page_number': self.counter})
+            yield SplashRequest(response.url, self.parse, endpoint='execute', args={'lua_source': self.script, 'wait': 2, 'page_number': self.counter})
         else:
             self.log("Next button is disabled, no more pages to scrape.")
